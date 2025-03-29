@@ -24,6 +24,7 @@ jobs:
             > artifact_id.txt
           
           ARTIFACT_ID=$(head -n 1 artifact_id.txt)
+          echo "Artifact ID: $ARTIFACT_ID"
           
           gh api \
             repos/tractordev/wanix/actions/artifacts/$ARTIFACT_ID/zip \
@@ -32,7 +33,6 @@ jobs:
             > artifact.zip
             
           unzip artifact.zip
-          ls
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
