@@ -792,6 +792,7 @@ version:f[1],path:f[2]});break;default:da.Debug("Error in Unmarshall: Unknown ty
 			umask() { throw enosys(); },
 			cwd() { throw enosys(); },
 			chdir() { throw enosys(); },
+			exit() {},
 		}
 	}
 
