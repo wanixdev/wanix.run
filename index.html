@@ -1,0 +1,16 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+        <link rel="stylesheet" href="./wanix.css" />
+        <script src="./wanix.bundle.js"></script>
+	</head>
+	<body>
+        <script>
+            new Wanix({ helpers: true });
+
+            if (!window.location.search.includes('shell=false')) {
+                window.bootShell(window.location.search.includes('console=true'));
+            }
+        </script>
+	</body>
+</html>
