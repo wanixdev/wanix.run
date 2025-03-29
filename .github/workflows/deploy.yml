@@ -20,12 +20,12 @@ jobs:
         run: |
           gh api \
             repos/tractordev/wanix/actions/artifacts \
-            --jq '.artifacts[] | select(.name=="wanix-build.zip") | .id' \
+            --jq '.artifacts[] | select(.name=="wanix-build") | .id' \
             > artifact_id.txt
           
           ARTIFACT_ID=$(head -n 1 artifact_id.txt)
           echo "Artifact ID: $ARTIFACT_ID"
-          
+
           gh api \
             repos/tractordev/wanix/actions/artifacts/$ARTIFACT_ID/zip \
             --method GET \
