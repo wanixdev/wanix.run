@@ -18,8 +18,22 @@ jobs:
 
       - name: Install Wanix
         run: |
-          wget -O wanix-build.zip https://github.com/tractordev/wanix/actions/runs/14139739801/artifacts/2842647238
-          unzip wanix-build.zip
+          gh api \
+            repos/tractordev/wanix/actions/artifacts \
+            --jq '.artifacts[] | select(.name=="wanix-build.zip") | .id' \
+            > artifact_id.txt
+          
+          ARTIFACT_ID=$(cat artifact_id.txt)
+          
+          gh api \
+            repos/tractordev/wanix/actions/artifacts/$ARTIFACT_ID/zip \
+            --method GET \
+            -H "Accept: application/vnd.github.v3+json" \
+            --output artifact.zip
+            
+          unzip artifact.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Build
         run: |
