@@ -33,7 +33,7 @@ jobs:
             
           unzip artifact.zip
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Build
         run: |
