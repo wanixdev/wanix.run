@@ -3389,7 +3389,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   };
-  window.Wanix = Wanix;
+  if (globalThis.window) {
+    window.Wanix = Wanix;
+  }
   function setupConsoleHelpers() {
     window.list = (name) => {
       window.wanix.instance.readDir(name).then(console.log);
