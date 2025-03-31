@@ -40,8 +40,9 @@ jobs:
         run: |
           mkdir -p _public
           ./wanix export | tar -xf - -C _public
-          rm -rf _public/index.html
+          rm -rf _public/index.html _public/debug.html
           cp web/index.html _public/index.html
+          cp web/debug.html _public/debug.html
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
