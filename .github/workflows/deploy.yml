@@ -38,13 +38,16 @@ jobs:
 
       - name: Build
         run: |
-          mkdir -p _public
-          ./wanix export | tar -xf - -C _public
-          rm -rf _public/index.html _public/debug.html
-          cp web/index.html _public/index.html
-          cp web/debug.html _public/debug.html
+          WANIX_BIN=./wanix make build
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _public
+      
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy _public --project-name=wanix-run
