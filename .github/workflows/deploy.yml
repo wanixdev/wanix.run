@@ -20,7 +20,7 @@ jobs:
         run: |
           gh api \
             repos/tractordev/wanix/actions/artifacts \
-            --jq '.artifacts[] | select(.name=="wanix-build") | .id' \
+            --jq '.artifacts[] | select(.name=="wanix-linux-amd64") | .id' \
             > artifact_id.txt
           
           ARTIFACT_ID=$(head -n 1 artifact_id.txt)
